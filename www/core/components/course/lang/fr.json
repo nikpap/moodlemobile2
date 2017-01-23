@@ -5,6 +5,7 @@
     "activitynotyetviewableremoteaddon": "Votre institution a installé un plugin qui n'est pas encore supporté.",
     "activitynotyetviewablesiteupgradeneeded": "L'installation Moodle de votre institution doit être mise à jour.",
     "allsections": "Toutes les sections",
+    "gotocoursecontent": "Accéder au contenu",
     "askadmintosupport": "Veuillez contacter l'administrateur de la plateforme et l'informer que vous désirez utiliser cette activité avec l'app mobile Moodle.",
     "confirmdeletemodulefiles": "Voulez-vous vraiment supprimer ces fichiers de module ?",
     "confirmdownload": "Vous allez télécharger {{size}}. Voulez-vous vraiment continuer ?",

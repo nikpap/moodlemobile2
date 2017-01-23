@@ -40,10 +40,20 @@ angular.module('mm.core.course')
         if ($scope.sitehome) {
             $scope.title = $translate.instant('mma.frontpage.sitehome');
         } else {
-            $scope.title = $translate.instant('mm.course.allsections');
+
+            // We don't have the course name, get it.
+            promise = $mmCourses.getUserCourse(courseId).catch(function() {
+            }).then(function(course) {
+                $scope.title = course.fullname;
+            }).catch(function() {
+                // Fail again, return generic value.
+                return $translate.instant('mm.course.allsections');
+            });
         }
         $scope.summary = null;
         $scope.allSections = true;
+
+
     }
 
     // Convenience function to fetch section(s).

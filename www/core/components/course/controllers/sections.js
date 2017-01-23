@@ -32,6 +32,7 @@ angular.module('mm.core.course')
     $scope.courseId = courseId;
     $scope.sectionToLoad = 2; // Load "General" section by default.
     $scope.fullname = courseFullName;
+    $scope.summary = courseFullName;
     $scope.downloadSectionsEnabled = $mmCourseHelper.isDownloadSectionsEnabled();
     $scope.downloadSectionsIcon = getDownloadSectionIcon();
     $scope.sectionHasContent = $mmCourseHelper.sectionHasContent;
@@ -52,13 +53,26 @@ angular.module('mm.core.course')
                 // Fail again, return generic value.
                 return $translate.instant('mm.core.course');
             });
+
         }
+
+        // Get course summary
+        promise = $mmCourses.getUserCourse(courseId).catch(function() {
+            // Fail, maybe user isn't enrolled but he has capabilities to view it.
+            return $mmCourses.getCourse(courseId);
+        }).then(function(course) {
+            $scope.summary = course.summary;
+        }).catch(function() {
+            // Fail again, return generic value.
+            return $translate.instant('mm.core.course');
+        });
 
         return promise.then(function(courseFullName) {
             if (courseFullName) {
                 $scope.fullname = courseFullName;
             }
 
+            // $scope.summary = course.summary;
             // Get the sections.
             return $mmCourse.getSections(courseId, false, true).then(function(sections) {
                 // Add a fake first section (all sections).
@@ -67,9 +81,10 @@ angular.module('mm.core.course')
                     var result = [{
                         name: str,
                         id: mmCoreCourseAllSectionsId
-                    }].concat(sections);
+                    }];
 
                     $scope.sections = result;
+
 
                     if ($scope.downloadSectionsEnabled) {
                         calculateSectionStatus(refresh);

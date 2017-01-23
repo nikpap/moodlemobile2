@@ -18,6 +18,7 @@
     <ion-side-menu side="left" id="mm-side-menu-left">
         <header>
             <div class="bar bar-header bar-side-menu">
+
                 <a menu-close mm-user-link userid="{{siteinfo.userid}}" class="item item-avatar item-icon-right full-image">
                     <img ng-src="{{siteinfo.userpictureurl}}" alt="{{ 'mm.core.pictureof' | translate:{$a: siteinfo.fullname} }}" role="presentation" mm-external-content>
                     <h2>{{siteinfo.fullname}}</h2>
@@ -57,11 +58,6 @@
                     <li>
                         <a menu-close class="item item-icon-left" ui-sref="site.mm_settings" title="{{ 'mm.sidemenu.appsettings' | translate}}">
                             <i class="icon ion-gear-b"></i>{{ 'mm.sidemenu.appsettings' | translate}}
-                        </a>
-                    </li>
-                    <li>
-                        <a class="item item-icon-left" ng-click="logout()" title="{{ 'mm.sidemenu.changesite' | translate}}">
-                            <i class="icon ion-log-out"></i>{{ 'mm.sidemenu.changesite' | translate}}
                         </a>
                     </li>
                 </ul>

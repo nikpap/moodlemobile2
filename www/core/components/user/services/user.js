@@ -329,6 +329,7 @@ angular.module('mm.core.user')
             }
         });
 
+
         return $q.all(promises);
     };
 
