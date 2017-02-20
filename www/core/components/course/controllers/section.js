@@ -81,6 +81,17 @@ angular.module('mm.core.course')
                     sectionnumber = sectionId;
                     promise = $mmCourse.getSection(courseId, false, true, sectionId).then(function(section) {
                         $scope.title = section.name;
+
+                        // We don't have the course name, get it.
+                        promise = $mmCourses.getUserCourse(courseId).catch(function() {
+                        }).then(function(course) {
+                            $scope.title = course.fullname;
+                        }).catch(function() {
+                            // Fail again, return generic value.
+                            $scope.title = section.name;
+                        });
+
+
                         $scope.summary = section.summary;
                         return [section];
                     });
